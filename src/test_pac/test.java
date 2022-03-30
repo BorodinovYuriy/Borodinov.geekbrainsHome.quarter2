@@ -1,6 +1,6 @@
 package test_pac;
 
 public class test {
-    //empty
+    //Начало с lesson_2 Вторая четверть!
 
 }
