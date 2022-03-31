@@ -3,6 +3,7 @@ package lesson_2_Exception;
  * Метод checkArrAndSum проверяет корректность массива на размерность и ввод
  *В классе main создал экземпляр класса ExepArrMain
  * и выполнил всё в блоке try-catch(что бы не падало в ошибку)
+ *
  */
 public class ExcepArrMain {
     public static void main(String[] args) {
