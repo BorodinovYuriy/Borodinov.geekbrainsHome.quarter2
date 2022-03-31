@@ -4,7 +4,6 @@ package lesson_2_Exception;
  *В классе main создал экземпляр класса ExepArrMain
  * и выполнил всё в блоке try-catch(что бы не падало в ошибку)
  */
-
 public class ExcepArrMain {
     public static void main(String[] args) {
         String[][] arr1 = {
@@ -13,7 +12,6 @@ public class ExcepArrMain {
                 {"9", "0", "1", "2"},
                 {"3", "4", "5", "6"},
         };
-
         ExcepArrMain m = new ExcepArrMain();
 
         try{
@@ -46,7 +44,7 @@ public class ExcepArrMain {
     }
 
     static class MyArraySizeException extends Exception {
-    public MyArraySizeException(String message) {
+        public MyArraySizeException(String message) {
             super(message);
         }
     }
