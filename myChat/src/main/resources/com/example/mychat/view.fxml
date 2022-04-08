@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: ffcc99;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mychat.Controller">
+   <MenuBar fx:id="menuBar">
+     <menus>
+       <Menu mnemonicParsing="false" text="File">
+         <items>
+           <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#closeApp" text="Close" />
+               <MenuItem fx:id="saveChat" mnemonicParsing="false" onAction="#saveToFile" text="Save chat" />
+               <MenuItem fx:id="openChat" mnemonicParsing="false" onAction="#openChat" text="Open chat" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Edit">
+         <items>
+           <MenuItem fx:id="menuEditClear" mnemonicParsing="false" onAction="#clearHistory" text="Clear" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+   <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="50.0" VBox.vgrow="NEVER">
+      <right>
+         <Label fx:id="usersLabel" text="Участники:" textAlignment="JUSTIFY" textFill="#968585">
+            <padding>
+               <Insets right="20.0" />
+            </padding>
+         </Label>
+      </right>
+   </BorderPane>
+   <SplitPane dividerPositions="0.47983870967741943" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+     <items>
+
+                          <TextArea fx:id="textArea" editable="false" wrapText="true" />
+         <ListView fx:id="listView" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="100.0">
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor></ListView>
+     </items>
+   </SplitPane>
+    <HBox>
+        <TextField fx:id="textField" onAction="#sendMessage" promptText="input text" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets right="2.0" />
+         </HBox.margin></TextField>
+        <Button fx:id="button" onAction="#sendMessage" style="-fx-background-color: #46c7c9;" text="Send" />
+      <VBox.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" />
+      </VBox.margin>
+    </HBox>
+
+</VBox>
