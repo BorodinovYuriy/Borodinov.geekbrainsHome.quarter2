@@ -25,6 +25,7 @@ public class ThreadTest {
         System.arraycopy(arr, 0, arr1,0, HALF);
         System.arraycopy(arr, HALF, arr2,0, HALF);
 
+        //создал 2 отдельных потока, можно было бы объединить методом, оставил так для наглядности
 //вычисление первого потока
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < arr1.length; i++) {
