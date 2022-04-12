@@ -14,7 +14,7 @@ public class ThreadTest {
             arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) *
                     Math.cos(0.4f + i / 2));
         }
-        System.out.println("time method 1: "+(System.currentTimeMillis() - a));
+        System.out.println("Ð²Ñ€ÐµÐ¼Ñ Ð¼ÐµÑ‚Ð¾Ð´Ð° 1: "+(System.currentTimeMillis() - a));
     }
     public void secondMethod() throws InterruptedException {
         float[] arr = new float[SIZE];
@@ -25,8 +25,8 @@ public class ThreadTest {
         System.arraycopy(arr, 0, arr1,0, HALF);
         System.arraycopy(arr, HALF, arr2,0, HALF);
 
-        //ñîçäàë 2 îòäåëüíûõ ïîòîêà, ìîæíî áûëî áû îáúåäèíèòü ìåòîäîì, îñòàâèë òàê äëÿ íàãëÿäíîñòè
-//âû÷èñëåíèå ïåðâîãî ïîòîêà
+        //ÑÐ¾Ð·Ð´Ð°Ð» 2 Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¿Ð¾Ñ‚Ð¾ÐºÐ°, Ð¼Ð¾Ð¶Ð½Ð¾ Ð±Ñ‹Ð»Ð¾ Ð±Ñ‹ Ð¾Ð±ÑŠÐµÐ´Ð¸Ð½Ð¸Ñ‚ÑŒ Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð¼, Ð¾ÑÑ‚Ð°Ð²Ð¸Ð» Ñ‚Ð°Ðº Ð´Ð»Ñ Ð½Ð°Ð³Ð»ÑÐ´Ð½Ð¾ÑÑ‚Ð¸
+//Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ðµ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < arr1.length; i++) {
                 arr1[i] = (float)(arr1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) *
@@ -34,7 +34,7 @@ public class ThreadTest {
             }
         });
 
-//âû÷èñëåíèå âòîðîãî ïîòîêà
+//Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ðµ Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°
         Thread thread2 = new Thread(() -> {
             for (int i = 0; i < arr2.length; i++) {
                 arr2[i] = (float)(arr2[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) *
@@ -47,13 +47,13 @@ public class ThreadTest {
         thread1.join();
         thread2.join();
 
-//ìîæíî áûëî áû ïåðåïèñàòü ñòàðûé ìàññèâ, äëÿ ïðèìåðà äîñòàòî÷íî òàê
+//Ð¼Ð¾Ð¶Ð½Ð¾ Ð±Ñ‹Ð»Ð¾ Ð±Ñ‹ Ð¿ÐµÑ€ÐµÐ¿Ð¸ÑÐ°Ñ‚ÑŒ ÑÑ‚Ð°Ñ€Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð², Ð´Ð»Ñ Ð¿Ñ€Ð¸Ð¼ÐµÑ€Ð° Ð´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ Ñ‚Ð°Ðº
         float[] mergedArr = new float[SIZE];
 
         System.arraycopy(arr1, 0, mergedArr,0, HALF);
         System.arraycopy(arr2, 0, mergedArr, HALF, HALF);
 
-        System.out.println("time method 2: "+(System.currentTimeMillis() - b));
+        System.out.println("Ð²Ñ€ÐµÐ¼Ñ Ð¼ÐµÑ‚Ð¾Ð´Ð° 2: "+(System.currentTimeMillis() - b));
     }
 
 
