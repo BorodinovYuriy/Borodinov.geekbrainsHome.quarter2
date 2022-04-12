@@ -33,6 +33,7 @@ public class ThreadTest {
                         Math.cos(0.4f + i / 2));
             }
         });
+
 //вычисление второго потока
         Thread thread2 = new Thread(() -> {
             for (int i = 0; i < arr2.length; i++) {
@@ -46,6 +47,7 @@ public class ThreadTest {
         thread1.join();
         thread2.join();
 
+//можно было бы переписать старый массив, для примера достаточно так
         float[] mergedArr = new float[SIZE];
 
         System.arraycopy(arr1, 0, mergedArr,0, HALF);
@@ -61,5 +63,4 @@ public class ThreadTest {
         t.secondMethod();
 
     }
-
 }
