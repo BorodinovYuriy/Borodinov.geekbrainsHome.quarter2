@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csbd.ClientController">
+   <VBox fx:id="topVBox" depthTest="DISABLE" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="75.0" prefWidth="300.0" VBox.vgrow="NEVER">
+      <children>
+         <Label text="Авторизация:" />
+         <TextField fx:id="logTF" promptText="login" />
+         <PasswordField fx:id="passPF" promptText="password" />
+         <Button fx:id="authB" mnemonicParsing="false" onAction="#auth" prefWidth="100.0" text="OK" />
+      </children></VBox>
+   <VBox fx:id="botVBox" VBox.vgrow="ALWAYS" >
+      <children>
+          <TextArea fx:id="textArea" editable="false" prefHeight="174.0" prefWidth="235.0" VBox.vgrow="ALWAYS" />
+          <HBox fx:id="botHBox" visible="false">
+              <TextField fx:id="textField" onKeyPressed="#keyListener" promptText="Input Text Message..." HBox.hgrow="ALWAYS" />
+              <Button fx:id="button" onAction="#sendMessage" onKeyPressed="#keyListener" text="Send" />
+          </HBox>
+      </children>
+   </VBox>
+</VBox>
