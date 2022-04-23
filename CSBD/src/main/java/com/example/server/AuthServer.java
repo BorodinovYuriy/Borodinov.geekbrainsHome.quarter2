@@ -45,5 +45,18 @@ public class AuthServer {
         }
         return null;
     }
+    public static void setLoginPasswordNickname(String log, String pass, String nick){
+        String sql = String.format("insert into users (login, password, nickname) values ('%s', '%s', '%s')",log, pass, nick);
+
+        try {
+            statement.executeQuery(sql);//выполни наш запрос
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Что то не так с запросом SQL на ввод данных");
+        }
+
+
+    }
 
 }

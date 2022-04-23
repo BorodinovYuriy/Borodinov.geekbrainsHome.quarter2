@@ -11,8 +11,20 @@ public class ClientHandler {
     ServerMain server;
     DataOutputStream out;
     DataInputStream in;
-    String nickname;
-
+    private String nickname;
+    public void sendMSG(String str){
+        try {
+            System.out.println(nickname +"- "+ str);//печатает в консоль сервера
+            if(str.equals("/authok"))out.writeUTF(str + "\n");
+            out.writeUTF(str + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("SendMSG exception");
+        }
+    }
+    public String getNickname() {
+        return nickname;
+    }
     public ClientHandler(Socket socket,ServerMain serverMain) {
         this.socket = socket;
         this.server = serverMain;
@@ -26,39 +38,48 @@ public class ClientHandler {
                 public void run() {
                     try {
                         while (true){
-                            String str = in.readUTF(); // */auth log pass
+                            //авторизация
+                                String str = in.readUTF(); // */auth log pass
+                            //Задание нового пользователя
+                            if(str.startsWith("/new")){
+                                String[] fmt = str.split(" ");
+                                AuthServer.setLoginPasswordNickname(fmt[1],fmt[2],fmt[3]);
+                                System.out.println("Зарегистрирован новый пользователь");
+                            }
                             if(str.startsWith("/auth")){
-                                String[] creds = str.split(" ");
-                                String nick = AuthServer.getNickByLogPassSQL(creds[1],creds[2]);
-                                if(nick != null){
-                                    //задали никнейм
-                                    nickname = nick;
-                                    sendMSG("/authok");
-                                    server.subscribe(ClientHandler.this);
-                                    break;
-                                }else{
-                                    sendMSG("Wrong log/pass");
+                                    String[] creds = str.split(" ");
+                                    String nick = AuthServer.getNickByLogPassSQL(creds[1],creds[2]);
+                                    if(nick != null){
+                                        //задали никнейм
+                                        nickname = nick;
+                                        if(isUserCorrect(nickname,server))break;///
+                                    }else{
+                                        sendMSG("Wrong log/pass\n");
+                                    }
                                 }
-
-                            }
                         }
-
-
+                        //////////////
                         while (true) {
-                            String str;
-                            str = in.readUTF();
-                            if (str.equals("/end")) {
-                                out.writeUTF("/end");
-                                break;
-                            }
-                            ////исправление ошибок имён, отправка форматированного текста
-                            String strF;
-                            if(str.startsWith("/w ")){
-                                strF = "/w " + getNickname() + ": " + str;
-                            }else{
-                                strF = getNickname() + ": " + str;
-                            }
-                            serverMain.sendToAll(strF);
+                            //Обработка служебных команд
+                                String str;
+                                str = in.readUTF();
+                                if (str.equals("/end")) {
+                                    out.writeUTF("/end");
+                                    /*server.sendOnlineUsers();////!!!*/
+                                    break;
+                                }
+                            /*if (str.startsWith("/show")){
+                                server.sendOnlineUsers();
+                            }*/
+                                ////исправление ошибок имён, отправка форматированного текста
+                                String strF;
+                                if(str.startsWith("/w")){
+
+                                    strF = "/w " + getNickname() + ": " + str;
+                                }else{
+                                    strF = getNickname() + ": " + str;
+                                }
+                                server.sendToAll(strF);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -74,7 +95,6 @@ public class ClientHandler {
                             e.printStackTrace();
                         }
                         try {
-//                            out.writeUTF("/end");
                             socket.close();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -88,19 +108,21 @@ public class ClientHandler {
             e.printStackTrace();
         }
     }
-    public void sendMSG(String str){
 
-        try {
-            System.out.println(nickname +": "+ str);//печатает в консоль сервера
-            if(str.equals("/authok"))out.writeUTF(str + "\n");
-            out.writeUTF(str + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("SendMSG exception");
+    private boolean isUserCorrect (String nickname, ServerMain server) {
+        if(server.isNickFree(nickname)){
+            server.subscribe(ClientHandler.this);
+            sendMSG("/authok");
+            server.sendOnlineUsers();
+            return true;
+
+        }else{
+            sendMSG("Wrong log/pass (  isUserCorrect()  )");
+            return false;
         }
+
+
     }
 
-    public String getNickname() {
-        return nickname;
-    }
+
 }

@@ -11,7 +11,7 @@ public class ClientApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientApplication.class.getResource("client-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 400);
         stage.setTitle("CSBD");
         stage.setScene(scene);
         stage.show();
